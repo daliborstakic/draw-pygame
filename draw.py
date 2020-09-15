@@ -16,8 +16,9 @@ pygame.display.set_caption("Draw")
 WHITE = (255, 255, 255)
 
 class Tool():
-    def __init__(self, color):
+    def __init__(self, color, thickness):
         self._color = color
+        self._thickness = thickness
 
     @property
     def color(self):
@@ -28,6 +29,16 @@ class Tool():
     def color(self, color):
         """ Color setter """
         self._color = color
+
+    @property
+    def thickness(self):
+        """ Thickness getter """
+        return self._thickness
+
+    @thickness.setter
+    def thickness(self, thickness):
+        """ Thickness setter """
+        self._thickness = thickness 
 
 def init_grid():
     """ Initializes the grid """
