@@ -38,7 +38,7 @@ class Tool():
     @thickness.setter
     def thickness(self, thickness):
         """ Thickness setter """
-        self._thickness = thickness 
+        self._thickness = thickness
 
 def draw_on_clicked(tool, pos):
     """ Draws a rectangle on the clicked position """
@@ -51,7 +51,7 @@ def main():
     run = True
 
     # Drawing tools
-    brush = Tool(RED, 5)
+    brush = Tool(BLACK, 5)
     eraser = Tool(WHITE, 10)
 
     # Initial fill
@@ -62,6 +62,11 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False # Quits the game
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    brush.color = RED
+
             if pygame.mouse.get_pressed()[0]: # Left mouse button draws
                 pos = pygame.mouse.get_pos()
                 draw_on_clicked(brush, pos)
