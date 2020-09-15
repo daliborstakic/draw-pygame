@@ -14,6 +14,9 @@ pygame.display.set_caption("Draw")
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+YELLOW = (255, 255, 0)
 
 class Tool():
     def __init__(self, color, thickness):
@@ -66,6 +69,16 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     brush.color = RED
+                if event.key == pygame.K_d:
+                    brush.color = BLACK
+                if event.key == pygame.K_g:
+                    brush.color = GREEN
+                if event.key == pygame.K_b:
+                    brush.color = BLUE
+                if event.key == pygame.K_y:
+                    brush.color = YELLOW
+                if event.key == pygame.K_c:
+                    pass
 
             if pygame.mouse.get_pressed()[0]: # Left mouse button draws
                 pos = pygame.mouse.get_pos()
