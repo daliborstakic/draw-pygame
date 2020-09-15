@@ -82,6 +82,11 @@ def main():
                     brush.color = YELLOW
                 if event.key == pygame.K_c:
                     clear_screen()
+                if event.key == pygame.K_EQUALS:
+                    brush.thickness += 5
+                if event.key == pygame.K_MINUS:
+                    if brush.thickness >= 10:
+                        brush.thickness -= 5
 
             if pygame.mouse.get_pressed()[0]: # Left mouse button draws
                 pos = pygame.mouse.get_pos()
