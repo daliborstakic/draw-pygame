@@ -49,6 +49,9 @@ def draw_on_clicked(tool, pos):
 
     pygame.draw.rect(WIN, tool.color, (x, y, tool.thickness, tool.thickness))
 
+def clear_screen():
+    WIN.fill(WHITE)
+
 def main():
     """ Main function """
     run = True
@@ -78,7 +81,7 @@ def main():
                 if event.key == pygame.K_y:
                     brush.color = YELLOW
                 if event.key == pygame.K_c:
-                    pass
+                    clear_screen()
 
             if pygame.mouse.get_pressed()[0]: # Left mouse button draws
                 pos = pygame.mouse.get_pos()
