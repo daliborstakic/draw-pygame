@@ -13,6 +13,7 @@ pygame.display.set_caption("Draw")
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 
 class Tool():
     def __init__(self, color, thickness):
@@ -49,19 +50,24 @@ def main():
     """ Main function """
     run = True
 
-    # Drawing tool
-    tool = Tool(BLACK, 5)
+    # Drawing tools
+    brush = Tool(RED, 5)
+    eraser = Tool(WHITE, 10)
 
     # Initial fill
     WIN.fill(WHITE)
 
+    # Main loop
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
-            if pygame.mouse.get_pressed()[0]:
+                run = False # Quits the game
+            if pygame.mouse.get_pressed()[0]: # Left mouse button draws
                 pos = pygame.mouse.get_pos()
-                draw_on_clicked(tool, pos)
+                draw_on_clicked(brush, pos)
+            elif pygame.mouse.get_pressed()[2]: # Right mouse button erases
+                pos = pygame.mouse.get_pos()
+                draw_on_clicked(eraser, pos)
 
         pygame.display.update()
 
