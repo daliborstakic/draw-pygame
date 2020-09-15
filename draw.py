@@ -15,7 +15,22 @@ pygame.display.set_caption("Draw")
 # Colors
 WHITE = (255, 255, 255)
 
+class Tool():
+    def __init__(self, color):
+        self._color = color
+
+    @property
+    def color(self):
+        """ Color getter """
+        return self._color
+
+    @color.setter
+    def color(self, color):
+        """ Color setter """
+        self._color = color
+
 def init_grid():
+    """ Initializes the grid """
     grid = []
     for i in range(ROWS):
         grid.append([])
@@ -25,10 +40,12 @@ def init_grid():
     return grid
 
 def draw():
+    """ Draws the screen """
     WIN.fill(WHITE)
     pygame.display.update()
 
 def main():
+    """ Main function """
     run = True
 
     while run:
