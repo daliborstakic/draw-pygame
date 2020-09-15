@@ -40,16 +40,6 @@ class Tool():
         """ Thickness setter """
         self._thickness = thickness 
 
-def init_grid():
-    """ Initializes the grid """
-    grid = []
-    for i in range(ROWS):
-        grid.append([])
-        for j in range(ROWS):
-            grid.append((i, j))
-    
-    return grid
-
 def draw():
     """ Draws the screen """
     WIN.fill(WHITE)
