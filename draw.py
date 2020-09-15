@@ -5,8 +5,6 @@ pygame.init()
 
 # Global parameters
 WIDTH = 500
-ROWS = 50
-GAP = WIDTH // ROWS
 
 # Screen
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
@@ -14,6 +12,7 @@ pygame.display.set_caption("Draw")
 
 # Colors
 WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 class Tool():
     def __init__(self, color, thickness):
@@ -40,21 +39,31 @@ class Tool():
         """ Thickness setter """
         self._thickness = thickness 
 
-def draw():
-    """ Draws the screen """
-    WIN.fill(WHITE)
-    pygame.display.update()
+def draw_on_clicked(tool, pos):
+    """ Draws a rectangle on the clicked position """
+    x, y = pos
+
+    pygame.draw.rect(WIN, tool.color, (x, y, tool.thickness, tool.thickness))
 
 def main():
     """ Main function """
     run = True
 
+    # Drawing tool
+    tool = Tool(BLACK, 5)
+
+    # Initial fill
+    WIN.fill(WHITE)
+
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            if pygame.mouse.get_pressed()[0]:
+                pos = pygame.mouse.get_pos()
+                draw_on_clicked(tool, pos)
 
-        draw()
+        pygame.display.update()
 
     pygame.quit()
 
