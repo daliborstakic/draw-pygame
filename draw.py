@@ -3,13 +3,26 @@ import pygame
 
 pygame.init()
 
-# Screen
+# Global parameters
 WIDTH = 500
+ROWS = 50
+GAP = WIDTH // ROWS
+
+# Screen
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("Draw")
 
 # Colors
 WHITE = (255, 255, 255)
+
+def init_grid():
+    grid = []
+    for i in range(ROWS):
+        grid.append([])
+        for j in range(ROWS):
+            grid.append((i, j))
+    
+    return grid
 
 def draw():
     WIN.fill(WHITE)
@@ -18,13 +31,13 @@ def draw():
 def main():
     run = True
 
-    draw()
-
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-    
+
+        draw()
+
     pygame.quit()
 
 if __name__ == "__main__":
