@@ -20,15 +20,16 @@ GREEN = (0, 255, 0)
 YELLOW = (255, 255, 0)
 
 class Button():
-    def __init__(self, color, width, height, text=""):
+    def __init__(self, color, width, height, x, y):
         self.color = color
         self.width = width
         self.height = height
-        self.text = text
+        self.x = x
+        self.y = y
 
-    def draw_button(self, x, y):
+    def draw_button(self):
         """ Draws the button """
-        pygame.draw.rect(WIN, self.color, (x, y, self.width, self.height))
+        pygame.draw.rect(WIN, self.color, (self.x, self.y, self.width, self.height))
     
     def is_clicked(self, pos):
         """ If a button has been clicked """
@@ -81,6 +82,12 @@ def main():
     # Drawing tools
     brush = Tool(BLACK, 5)
     eraser = Tool(WHITE, 10)
+
+    # Color buttons
+    red_button = Button(RED, 20, 10)
+    green_button = Button(GREEN, 20, 10)
+    blue_button = Button(BLUE, 20, 10)
+    yellow_button = Button(YELLOW, 20, 10)
 
     # Initial fill
     WIN.fill(WHITE)
