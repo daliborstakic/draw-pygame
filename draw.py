@@ -1,5 +1,6 @@
 """ Importing Pygame """
 import pygame
+from pygame.draw import rect
 
 pygame.init()
 
@@ -17,6 +18,26 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 YELLOW = (255, 255, 0)
+
+class Button():
+    def __init__(self, color, width, height, text=""):
+        self.color = color
+        self.width = width
+        self.height = height
+        self.text = text
+
+    def draw_button(self, x, y):
+        """ Draws the button """
+        pygame.draw.rect(WIN, self.color, (x, y, self.width, self.height))
+    
+    def is_clicked(self, pos):
+        """ If a button has been clicked """
+        x, y = pos
+
+        if self.x > x > self.x + self.width and self.y > y > self.y + self.height:
+            return True
+        
+        return False
 
 class Tool():
     def __init__(self, color, thickness):
@@ -50,6 +71,7 @@ def draw_on_clicked(tool, pos):
     pygame.draw.rect(WIN, tool.color, (x, y, tool.thickness, tool.thickness))
 
 def clear_screen():
+    """ Clears the screen """
     WIN.fill(WHITE)
 
 def main():
