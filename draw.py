@@ -24,6 +24,7 @@ PURPLE = (128, 0, 128)
 GRAY = (200, 200, 200)
 
 def color_switch(argument):
+    """ Added a number coresponding to a color """
     switcher = {
         1: RED,
         2: GREEN,
