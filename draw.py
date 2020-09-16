@@ -21,11 +21,15 @@ YELLOW = (255, 255, 0)
 
 class Button():
     def __init__(self, color, width, height, x, y):
-        self.color = color
+        self._color = color
         self.width = width
         self.height = height
         self.x = x
         self.y = y
+
+    @property
+    def color(self):
+        return self._color
 
     def draw_button(self):
         """ Draws the button """
@@ -35,7 +39,7 @@ class Button():
         """ If a button has been clicked """
         x, y = pos
 
-        if self.x > x > self.x + self.width and self.y > y > self.y + self.height:
+        if self.x < x < self.x + self.width and self.y < y < self.y + self.height:
             return True
         
         return False
@@ -84,35 +88,32 @@ def main():
     eraser = Tool(WHITE, 10)
 
     # Color buttons
-    red_button = Button(RED, 20, 10)
-    green_button = Button(GREEN, 20, 10)
-    blue_button = Button(BLUE, 20, 10)
-    yellow_button = Button(YELLOW, 20, 10)
+    red_button = Button(RED, 40, 20, 0, 460)
+    green_button = Button(GREEN, 40, 20, 40, 460)
+    blue_button = Button(BLUE, 40, 20, 0, 480)
+    yellow_button = Button(YELLOW, 40, 20, 40, 480)
+
+    # Color list
+    color_buttons = [red_button, green_button, blue_button, yellow_button]
 
     # Initial fill
     WIN.fill(WHITE)
 
     # Main loop
     while run:
+        for button in color_buttons:
+            # Drawing buttons
+            button.draw_button()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False # Quits the game
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_r:
-                    brush.color = RED
-                if event.key == pygame.K_d:
-                    brush.color = BLACK
-                if event.key == pygame.K_g:
-                    brush.color = GREEN
-                if event.key == pygame.K_b:
-                    brush.color = BLUE
-                if event.key == pygame.K_y:
-                    brush.color = YELLOW
                 if event.key == pygame.K_c:
                     clear_screen()
                 if event.key == pygame.K_EQUALS:
-                    brush.thickness += 5
+                    brush.thickness += 5   
                 if event.key == pygame.K_MINUS:
                     if brush.thickness >= 10:
                         brush.thickness -= 5
@@ -120,6 +121,11 @@ def main():
             if pygame.mouse.get_pressed()[0]: # Left mouse button draws
                 pos = pygame.mouse.get_pos()
                 draw_on_clicked(brush, pos)
+
+                for button in color_buttons:
+                    if button.is_clicked(pos):
+                        brush.color = button.color
+
             elif pygame.mouse.get_pressed()[2]: # Right mouse button erases
                 pos = pygame.mouse.get_pos()
                 draw_on_clicked(eraser, pos)
