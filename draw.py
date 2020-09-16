@@ -1,5 +1,6 @@
 """ Importing Pygame """
 import pygame
+from pygame import color
 from pygame.draw import rect
 
 pygame.init()
@@ -18,6 +19,23 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 YELLOW = (255, 255, 0)
+ORANGE = (255, 69, 0)
+PURPLE = (128, 0, 128)
+GRAY = (200, 200, 200)
+
+def color_switch(argument):
+    switcher = {
+        1: RED,
+        2: GREEN,
+        3: BLUE,
+        4: YELLOW,
+        5: ORANGE,
+        6: PURPLE,
+        7: BLACK,
+        8: GRAY
+    }
+
+    return switcher.get(argument)
 
 class Button():
     def __init__(self, color, width, height, x, y):
@@ -33,7 +51,7 @@ class Button():
 
     def draw_button(self):
         """ Draws the button """
-        pygame.draw.rect(WIN, self.color, (self.x, self.y, self.width, self.height))
+        rect(WIN, self.color, (self.x, self.y, self.width, self.height))
     
     def is_clicked(self, pos):
         """ If a button has been clicked """
@@ -88,13 +106,10 @@ def main():
     eraser = Tool(WHITE, 10)
 
     # Color buttons
-    red_button = Button(RED, 40, 20, 0, 460)
-    green_button = Button(GREEN, 40, 20, 40, 460)
-    blue_button = Button(BLUE, 40, 20, 0, 480)
-    yellow_button = Button(YELLOW, 40, 20, 40, 480)
+    color_buttons = []
 
-    # Color list
-    color_buttons = [red_button, green_button, blue_button, yellow_button]
+    for i in range(0, 8):
+        color_buttons.append(Button(color_switch(i + 1), 40, 20, 40 * (i // 2), 460 + (i % 2) * 20))
 
     # Initial fill
     WIN.fill(WHITE)
